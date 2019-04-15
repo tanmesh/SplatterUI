@@ -19,10 +19,6 @@ function getAllPosts(authorEmailId) {
     })
 }
 
-function login() {
-
-}
-
 function fillData(data) {
     const $instafeed = document.getElementById('instafeed');
     if (data.length > 0) {
@@ -52,5 +48,4 @@ function fillData(data) {
     }
 }
 
-
-getAllPosts('tanmeshnm@gmail.com')
+getAllPosts('tanmeshnm@gmail.com');
