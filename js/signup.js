@@ -1,10 +1,12 @@
-function signup() {
-    let firstName = document.getElementById('firstName').value;
-    let lastName = document.getElementById('lastName').value;
-    let emailId = document.getElementById('emailId').value;
-    let password = document.getElementById('password').value;
-    signUpUser(firstName, lastName, emailId, password)
-}
+// function signup() {
+//     let firstName = document.getElementById('firstName').value;
+//     let lastName = document.getElementById('lastName').value;
+//     let emailId = document.getElementById('emailId').value;
+//     let password = document.getElementById('password').value;
+//     signUpUser(firstName, lastName, emailId, password)
+// }
+
+const fetch = require("node-fetch");
 
 function signUpUser(firstName, lastName, emailId, password) {
     fetch('http://localhost:39114/auth/signup', {
@@ -17,6 +19,7 @@ function signUpUser(firstName, lastName, emailId, password) {
             if (!res.ok) {
                 return [];
             }
+            // window.location.replace("http://stackoverflow.com");
             return res.json();
         },
         error => {
@@ -27,3 +30,5 @@ function signUpUser(firstName, lastName, emailId, password) {
         console.log(error);
     })
 }
+
+module.exports = signUpUser;
