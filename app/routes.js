@@ -56,7 +56,7 @@ module.exports = (app, router) => {
 
     router
         .get('/', (req, res) => {
-            // console.log(req.cookies);
+            console.log(req.cookies);
             if (req.cookies.user) {
                 // Logged in index
                 res.render('home', {title: 'Home'})
@@ -161,7 +161,7 @@ module.exports = (app, router) => {
                 .catch(err => {
                     throw err
                 });
-        })
+        });
 
     app
         .get('/@:username', (req, res) => {
