@@ -3,16 +3,11 @@
 
 const debug = require('debug')('info');
 
-// const mongoose = require('mongoose');
-// const database = require('../config/database');
-
-// const User = require('./models/user');
-
 var signUpUser = require('../js/signup');
-
-/* Mongo Config */
-// mongoose.Promise = global.Promise;
-// mongoose.connect(database.url, {useMongoClient: true});
+var loginUser = require('../js/login');
+var getAllTags = require('../js/get_all_tags');
+var followTag = require('../js/follow_tag');
+var getProfile = require('../js/get_profile');
 
 const PORT = process.env.PORT || 8031;
 
@@ -22,31 +17,23 @@ module.exports = (app, router) => {
         req.cookies.user ? next() : res.redirect('/login');
     }
 
-    function register(firstName, lastName, emailId, password, req, res, next) {
+    function register(firstName, lastName, emailId, password, next) {
         signUpUser(firstName, lastName, emailId, password);
         next();
     }
 
-    // Populate all pages with user object if authenticated
-    // app.use((req, res, next) => {
-    //     if (req.cookies.user) {
-    //         User.findById(req.cookies.user, (err, user) => {
-    //             if (err) {
-    //                 throw err;
-    //             }
-    //
-    //             console.log('Populating page with user object');
-    //             res.locals.user = user;
-    //
-    //             next();
-    //         });
-    //     } else {
-    //         next();
-    //     }
-    // });
+    function login(emailId, password, next) {
+        loginUser(emailId, password, next);
+    }
 
-    // Sanitize all input so nobody hax us xD
-    // I'm sure one random npm module will fix that
+    function tags(next) {
+        getAllTags(next);
+    }
+
+    function follow(tagName, accessToken, next) {
+        followTag(tagName, accessToken, next);
+    }
+
     app.use(require('sanitize').middleware);
 
     router
@@ -56,17 +43,16 @@ module.exports = (app, router) => {
 
     router
         .get('/', (req, res) => {
-            console.log(req.cookies);
             if (req.cookies.user) {
                 // Logged in index
-                res.render('home', {title: 'Home'})
+                res.render('profile', {title: 'Feed'})
                 // User.find({}, (err, users) => {
                 //     if (err) throw err;
                 //     // just list all users at the moment
                 //     res.render('home', {title: 'Home', users: users})
                 // })
             } else {
-                res.render('welcome', {title: 'An easier way to plan'});
+                res.render('welcome', {title: 'Food Social Network'});
             }
         });
 
@@ -89,15 +75,28 @@ module.exports = (app, router) => {
 
                 return res.render('register');
             }
-            register(req.body.first_name, req.body.last_name, req.body.email_id, req.body.password, req, res, user => {
+            register(req.body.first_name, req.body.last_name, req.body.email_id, req.body.password, () => {
                 console.log(`user "${req.body.email_id}" registered successfully`);
-
-                // Authentication cookie lasts 60 mins
-                res.cookie('user', req.body.email_id, {maxAge: 1000 * 60 * 60});
 
                 res.redirect('/')
             });
         });
+
+    router
+        .get('/tags', (req, res) => {
+            tags(resp => {
+                res.render('tag', {tags: resp});
+            });
+        });
+
+    router
+        .post('/followTag', (req, res) => {
+            console.log(Object.keys(req.body)[0]);
+            follow(Object.keys(req.body)[0], req.cookies.user.accessToken, resp => {
+                res.redirect('/tags')
+            });
+        });
+
 
     router
         .get('/login', (req, res) => {
@@ -113,13 +112,13 @@ module.exports = (app, router) => {
                 return res.redirect('/');
             }
 
-            if (!req.body.username || !req.body.password) {
+            if (!req.body.emailId || !req.body.password) {
                 req.flash('info', 'Username/password not provided');
                 return res.render('login');
             }
 
-            User.findOne({username: req.body.username}, (err, user) => {
-                console.log(!user);
+            login(req.body.emailId, req.body.password, (user) => {
+                console.log(user);
                 if (!user) {
                     console.log('user doesnt exist');
                     // user probably doesn't even exist lol
@@ -127,13 +126,10 @@ module.exports = (app, router) => {
                     return res.render('login');
                 }
 
-                if (user.compare(req.body.password)) {
-                    res.cookie('user', user._id, {maxAge: 1000 * 60 * 60});
-                    res.redirect('/');
-                } else {
-                    req.flash('warning', 'Incorrect username/password');
-                    return res.render('login');
-                }
+                // Authentication cookie lasts 60 mins
+                res.cookie('user', user, {maxAge: 1000 * 60 * 60});
+
+                res.redirect('/')
             });
         });
 

@@ -10,6 +10,41 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+#wrap{
+    width:100%;
+    margin:2px auto;
+}
+.box{
+    float:left;
+    width:48%;
+    height:200px;
+    background:orange;
+    border:2px solid red;
+    margin:2px auto;
+}
+
+.redbox, .bluebox,.greenbox{
+  padding: 10px 5px;
+  border: #ccc solid 1px;
+  text-align: center;
+}
+
+.redbox{
+  background: red;
+  color: #fff;
+}
+
+.bluebox{
+  background: blue;
+  color: #fff;
+}
+
+.greenbox{
+  background: green;
+  color: #fff;
+}
+
 :root {
   --blue: #3466a1;
   --indigo: #6610f2;
