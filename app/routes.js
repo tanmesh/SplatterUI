@@ -166,63 +166,6 @@ module.exports = (app, router) => {
         });
 
     app
-        .get('/delete/:id', (req, res) => {
-            res.render('delete');
-        })
-        .post('/delete/:id', (req, res) => {
-            console.log('deleting: ' + req.params.id);
-            User
-                .findById(req.params.id)
-                .remove()
-                .exec()
-                .then(user => {
-                    res.clearCookie('user', {path: '/'})
-                    req.flash('info', 'Your account has been deleted')
-                    res.render('index')
-                })
-                .catch(err => {
-                    throw err
-                });
-        });
-
-    app
-        .get('/@:username', (req, res) => {
-            if (!req.params.username) res.redirect('/404');
-
-            User.findOne({username: req.params.username}, (err, user) => {
-                if (err) throw err;
-                var admin;
-
-                if (req.cookies.user == user._id) {
-                    // this is the logged in user
-                    admin = true;
-                } else {
-                    // this is just a user viewing a profile
-                    admin = false;
-                }
-
-                res.render('profile', {user: user, admin: admin})
-            })
-        })
-        .post('/@:username', authenticated, (req, res) => {
-            if (!req.body.bio) res.redirect('/@' + req.params.username);
-
-            User.findById(req.cookies.user, (err, user) => {
-                if (user.username == req.params.username) {
-                    // this user is authorized to edit bio
-                    user.bio = req.body.bio;
-                    user.save((err) => {
-                        if (err) throw err;
-
-                        console.log('Saved bio');
-                    })
-                } else {
-                    redirect('/@' + req.params.username)
-                }
-            })
-        })
-
-    app
         .get('/404', (req, res) => {
             // just redirect home for now. TODO: Change this to warning message
             res.redirect('/');
