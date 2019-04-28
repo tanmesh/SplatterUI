@@ -16,6 +16,10 @@
                     <a href="/"><h1>Splatter</h1></a>
                     <hr>
                 </div>
+                <div class="col-med">
+                    <a href="/feed"><h1>Feed</h1></a>
+                    <hr>
+                </div>
             </div>
             {{#if messages}}
                 {{#each messages}}
@@ -26,7 +30,6 @@
                     </div>
                 {{/each}}
             {{/if}}
-            <!-- Just load everything else lol I love moustache -->
             {{{body}}}
             {{#user}}
                 <div class="row">

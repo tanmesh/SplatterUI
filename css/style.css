@@ -24,15 +24,12 @@
     margin:2px auto;
 }
 
-.redbox, .bluebox,.greenbox{
-  padding: 10px 5px;
-  border: #ccc solid 1px;
-  text-align: center;
-}
-
 .redbox{
   background: red;
   color: #fff;
+  padding: 10px 5px;
+  border: #ccc solid 1px;
+  text-align: center;
 }
 
 .bluebox{

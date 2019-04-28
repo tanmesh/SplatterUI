@@ -34,6 +34,10 @@ module.exports = (app, router) => {
         followTag(tagName, accessToken, next);
     }
 
+    function profile(accessToken, next) {
+        getProfile(accessToken, next);
+    }
+
     app.use(require('sanitize').middleware);
 
     router
@@ -79,6 +83,14 @@ module.exports = (app, router) => {
                 console.log(`user "${req.body.email_id}" registered successfully`);
 
                 res.redirect('/')
+            });
+        });
+
+    router
+        .get('/profile', (req, res) => {
+            profile(req.cookies.user.accessToken, (resp) => {
+                console.log(resp);
+                res.render('profile', {user: resp});
             });
         });
 
