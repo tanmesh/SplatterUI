@@ -8,6 +8,7 @@ var loginUser = require('../js/login');
 var getAllTags = require('../js/get_all_tags');
 var followTag = require('../js/follow_tag');
 var getProfile = require('../js/get_profile');
+var getUserFeed = require('../js/user_feed');
 
 const PORT = process.env.PORT || 8031;
 
@@ -38,7 +39,17 @@ module.exports = (app, router) => {
         getProfile(accessToken, next);
     }
 
+    function getFeed(accessToken, next) {
+        getUserFeed(accessToken, next);
+    }
+
     app.use(require('sanitize').middleware);
+
+    router
+        .get('/del', (req, res) => {
+            res.cookie('user', '', {maxAge: Date.now()});
+            res.redirect('/')
+        });
 
     router
         .get('/cookies', (req, res) => {
@@ -49,12 +60,7 @@ module.exports = (app, router) => {
         .get('/', (req, res) => {
             if (req.cookies.user) {
                 // Logged in index
-                res.render('profile', {title: 'Feed'})
-                // User.find({}, (err, users) => {
-                //     if (err) throw err;
-                //     // just list all users at the moment
-                //     res.render('home', {title: 'Home', users: users})
-                // })
+                res.redirect('/profile');
             } else {
                 res.render('welcome', {title: 'Food Social Network'});
             }
@@ -91,6 +97,14 @@ module.exports = (app, router) => {
             profile(req.cookies.user.accessToken, (resp) => {
                 console.log(resp);
                 res.render('profile', {user: resp});
+            });
+        });
+
+    router
+        .get('/feed', (req, res) => {
+            getFeed(req.cookies.user.accessToken, (resp) => {
+                console.log(resp);
+                res.render('feed', {feed: resp, user: req.cookies.user});
             });
         });
 

@@ -1,6 +1,6 @@
 <div>
-    <div class="redbox">
-        <h5>Welcome, {{user.firstName}}  {{user.lastName}}</h5>
+    <div>
+        <h5>Welcome, {{user.user.firstName}}  {{user.user.lastName}}</h5>
         <div class="redbox">
             <h5>Posts</h5>
             <h4>{{user.userPostCount}}</h4>
@@ -9,5 +9,18 @@
             <h5>Following</h5>
             <h4>{{user.user.followingTagCount}}</h4>
         </div>
+        <div class="greenbox">
+            <h5>Followers</h5>
+            <h4>0</h4>
+        </div>
+    </div>
+    <div>
+        <ul>
+            {{#user.userPostList}}
+                <li>
+                    <img class="resize" src="{{image}}" alt="image"/>
+                </li>
+            {{/user.userPostList}}
+        </ul>
     </div>
 </div>
