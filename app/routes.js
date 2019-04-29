@@ -27,8 +27,8 @@ module.exports = (app, router) => {
         loginUser(emailId, password, next);
     }
 
-    function tags(next) {
-        getAllTags(next);
+    function tags(accessToken, next) {
+        getAllTags(accessToken, next);
     }
 
     function follow(tagName, accessToken, next) {
@@ -110,7 +110,8 @@ module.exports = (app, router) => {
 
     router
         .get('/tags', (req, res) => {
-            tags(resp => {
+            tags(req.cookies.user.accessToken, resp => {
+                console.log(resp);
                 res.render('tag', {tags: resp});
             });
         });

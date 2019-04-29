@@ -1,10 +1,11 @@
 const fetch = require("node-fetch");
 
-function getAllTags(next) {
+function getAllTags(accessToken, next) {
     fetch('http://localhost:39114/tag/get_all', {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
+            "x-access-token": accessToken,
         },
     }).then(res => {
             if (!res.ok) {

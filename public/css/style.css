@@ -1,6 +1,6 @@
 body {
-    color: #eee;
-    background: #80B3FF;
+    color: #0b0b0b;
+    background: #fff7e2;
     padding: 4%;
 }
 
@@ -47,7 +47,7 @@ footer {
 }
 
 .redbox {
-    background: red;
+    background: #ff7211;
     color: #fff;
     padding: 10px 5px;
     border: #ccc solid 1px;
@@ -57,7 +57,7 @@ footer {
 }
 
 .bluebox {
-    background: blue;
+    background: #3145ff;
     color: #fff;
     padding: 10px 5px;
     border: #ccc solid 1px;
@@ -67,7 +67,7 @@ footer {
 }
 
 .greenbox {
-    background: green;
+    background: #18805c;
     color: #fff;
     padding: 10px 5px;
     border: #ccc solid 1px;
@@ -79,8 +79,57 @@ footer {
 .resize {
     height: 400px;
     width: 400px;
-    border:1px solid #ccc;
-    padding:4px;
+    border: 1px solid #ccc;
+    padding: 4px;
     margin: 20px;
     border-radius: 15px;
+}
+
+.textarea {
+    width: 300px;
+    height: 150px;
+}
+
+.a1 {
+    background: #c2f812;
+    color: #040404;
+    padding: 10px 5px;
+    border: #ccc solid 1px;
+    text-align: center;
+    float: left;
+    width: 100px;
+}
+
+.a2 {
+    color: #040404;
+    width: 250px;
+    background: #ffa22c;
+    margin-left: inherit;
+}
+
+.a4 {
+    width: 600px;
+    margin: 0 auto;
+    border: 0px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+
+.a6 {
+
+}
+
+.a9 {
+    /*background: #e86edf;*/
+    color: #000;
+}
+
+.a8 {
+    color: #040404;
+    padding: 30px 10px;
+    border: #ccc solid 0px;
+    text-align: center;
+    float: left;
+    width: 250px;
+    font-size: xx-large;
 }

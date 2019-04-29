@@ -1,5 +1,5 @@
 <div>
-    <div>
+    <div class="a6">
         <h5>Welcome, {{user.user.firstName}}  {{user.user.lastName}}</h5>
         <div class="redbox">
             <h5>Posts</h5>
@@ -17,9 +17,18 @@
     <div>
         <ul>
             {{#user.userPostList}}
-                <li>
-                    <img class="resize" src="{{image}}" alt="image"/>
-                </li>
+                <div class="a4">
+                    <li>
+                        <img class="resize" src="{{image}}" alt="image"/>
+                    </li>
+                    <ul>
+                        {{#tags}}
+                            <li class="a1">
+                                {{this}}
+                            </li>
+                        {{/tags}}
+                    </ul>
+                </div>
             {{/user.userPostList}}
         </ul>
     </div>

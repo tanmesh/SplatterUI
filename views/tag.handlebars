@@ -1,16 +1,16 @@
-<div class="row">
-    <div class="col-md">
-        <h3>Tags</h3>
-        <ul>
-            {{#tags}}
-                <li>
-                    <form action="/followTag" method="POST">
-                        <div class="input-group mb-3">
-                            <input type="submit" name={{this.name}} value={{this.name}}>
-                        </div>
-                    </form>
-                </li>
-            {{/tags}}
-        </ul>
-    </div>
+<div>
+    <h3>Here is a list of all the tags you can follow</h3>
+    <ul>
+        {{#tags}}
+            <li>
+                <form action="/followTag" method="POST">
+                    <div class="a8">
+                        <input type="submit" class="a9" name={{tag.name}} value={{tag.name}}
+                               style="background-color:{{#if follow}}#b6e89d{{else}}#FFFFFF{{/if}};"
+                        >
+                    </div>
+                </form>
+            </li>
+        {{/tags}}
+    </ul>
 </div>

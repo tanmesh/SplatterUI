@@ -1,12 +1,39 @@
 <div>
     <div>
-        <h5>Welcome, {{user.firstName}}  {{user.lastName}}. Following is your feed on the basis of tags you followed</h5>
-        <ul>
-            {{#feed}}
-                <li>
-                    <img class="resize" src="{{image}}" alt="image"/>
-                </li>
-            {{/feed}}
-        </ul>
+        <h5>Welcome, {{user.firstName}}  {{user.lastName}}</h5>
+        <form action="/feed" method="GET">
+            <div class="row">
+                <div class="col-med">
+                    <textarea name="tag" class="textarea"
+                              placeholder="Tell us about your unqiue food experience">{{user.bio}}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group-mb-3">
+                    <input type="submit" value="Upload Photo">
+                </div>
+            </div>
+        </form>
+        <div>
+            <ul>
+                {{#feed}}
+                    <div class="a4">
+                        <div class="a2">
+                            Posted By: {{userEmailId}}
+                        </div>
+                        <li>
+                            <img class="resize" src="{{image}}" alt="image"/>
+                        </li>
+                        <ul>
+                            {{#tags}}
+                                <li class="a1">
+                                    {{this}}
+                                </li>
+                            {{/tags}}
+                        </ul>
+                    </div>
+                {{/feed}}
+            </ul>
+        </div>
     </div>
 </div>
