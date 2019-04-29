@@ -62,7 +62,7 @@ module.exports = (app, router) => {
                 // Logged in index
                 res.redirect('/profile');
             } else {
-                res.render('welcome', {title: 'Food Social Network'});
+                res.render('welcome', {title: 'Food Social Network', accessToken: false});
             }
         });
 
@@ -72,7 +72,7 @@ module.exports = (app, router) => {
                 return res.redirect('/');
             }
 
-            res.render('register', {title: 'Register'});
+            res.render('register', {title: 'Register',  accessToken: false});
         })
         .post('/register', (req, res) => {
             if (req.cookies.user) {
@@ -96,7 +96,7 @@ module.exports = (app, router) => {
         .get('/profile', (req, res) => {
             profile(req.cookies.user.accessToken, (resp) => {
                 console.log(resp);
-                res.render('profile', {user: resp});
+                res.render('profile', {user: resp,  accessToken: true});
             });
         });
 
@@ -104,7 +104,7 @@ module.exports = (app, router) => {
         .get('/feed', (req, res) => {
             getFeed(req.cookies.user.accessToken, (resp) => {
                 console.log(resp);
-                res.render('feed', {feed: resp, user: req.cookies.user});
+                res.render('feed', {feed: resp, user: req.cookies.user, accessToken: true});
             });
         });
 
@@ -112,7 +112,7 @@ module.exports = (app, router) => {
         .get('/tags', (req, res) => {
             tags(req.cookies.user.accessToken, resp => {
                 console.log(resp);
-                res.render('tag', {tags: resp});
+                res.render('tag', {tags: resp, accessToken: true});
             });
         });
 
