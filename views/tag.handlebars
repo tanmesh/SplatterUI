@@ -1,15 +1,16 @@
 <div class="row">
-    <p>spicy</p>
-</div>
-<div class="row">
-    <p>sweet</p>
-</div>
-<div class="row">
-    <p>must-try</p>
-</div>
-<div class="row">
-    <p>expensive</p>
-</div>
-<div class="row">
-    <p>can-skip</p>
+    <div class="col-md">
+        <h3>Tags</h3>
+        <ul>
+            {{#tags}}
+                <li>
+                    <form action="/followTag" method="POST">
+                        <div class="input-group mb-3">
+                            <input type="submit" name={{this.name}} value={{this.name}}>
+                        </div>
+                    </form>
+                </li>
+            {{/tags}}
+        </ul>
+    </div>
 </div>

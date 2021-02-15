@@ -1,27 +1,26 @@
-<div class="row">
-    <div class="col-med">
-        <h2>@{{user.username}}</h2>
+<div>
+    <div>
+        <h5>Welcome, {{user.user.firstName}}  {{user.user.lastName}}</h5>
+        <div class="redbox">
+            <h5>Posts</h5>
+            <h4>{{user.userPostCount}}</h4>
+        </div>
+        <div class="bluebox">
+            <h5>Following</h5>
+            <h4>{{user.user.followingTagCount}}</h4>
+        </div>
+        <div class="greenbox">
+            <h5>Followers</h5>
+            <h4>0</h4>
+        </div>
+    </div>
+    <div>
+        <ul>
+            {{#user.userPostList}}
+                <li>
+                    <img class="resize" src="{{image}}" alt="image"/>
+                </li>
+            {{/user.userPostList}}
+        </ul>
     </div>
 </div>
-
-{{#admin}}
-    <form action="/@{{user.username}}" method="POST">
-        <div class="row">
-            <div class="col-med">
-                <textarea name="bio" class="form-control" row="2" placeholder="Tell us about yourself">{{user.bio}}</textarea> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-group-mb-3">
-                <input type="submit" class="btn btn-light" value="Save">
-            </div>
-        </div>
-    </form>
-{{/admin}}
-{{^admin}}
-    <div class="row">
-        <div class="col-med">
-            <p>{{user.bio}}</p>
-        </div>
-    </div>
-{{/admin}}

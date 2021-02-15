@@ -1,29 +1,86 @@
 body {
-  color: #eee;
-  background: #80B3FF;
-  padding: 4%; }
+    color: #eee;
+    background: #80B3FF;
+    padding: 4%;
+}
 
 a {
-  color: inherit; }
-  a:hover {
-    color: #eee; }
+    color: inherit;
+}
+
+a:hover {
+    color: #eee;
+}
 
 hr {
-  background-color: #eee; }
+    background-color: #eee;
+}
 
 li {
-  list-style: none; }
+    list-style: none;
+}
 
 button {
-  font-family: "Aleo", sans-serif; }
+    font-family: "Aleo", sans-serif;
+}
 
 h1 {
-  font-weight: 700;
-  font-family: "Telex", "Helvetica", sans-serif; }
+    font-weight: 700;
+    font-family: "Telex", "Helvetica", sans-serif;
+}
 
 p {
-  font-size: 110%;
-  font-family: "Aleo", sans-serif; }
+    font-size: 110%;
+    font-family: "Aleo", sans-serif;
+}
 
 footer {
-  margin-top: 900%; }
+    margin-top: 900%;
+}
+
+.space1 {
+    padding: 15px;
+}
+
+.space2 {
+    padding: 15px;
+}
+
+.redbox {
+    background: red;
+    color: #fff;
+    padding: 10px 5px;
+    border: #ccc solid 1px;
+    text-align: center;
+    float: left;
+    width: 300px;
+}
+
+.bluebox {
+    background: blue;
+    color: #fff;
+    padding: 10px 5px;
+    border: #ccc solid 1px;
+    text-align: center;
+    float: left;
+    width: 300px;
+}
+
+.greenbox {
+    background: green;
+    color: #fff;
+    padding: 10px 5px;
+    border: #ccc solid 1px;
+    text-align: center;
+    float: left;
+    width: 300px;
+}
+
+.resize {
+    height: 400px;
+    width: 400px;
+    border:1px solid #ccc;
+    padding:4px;
+    margin: 20px;
+    border-radius: 15px;
+}
